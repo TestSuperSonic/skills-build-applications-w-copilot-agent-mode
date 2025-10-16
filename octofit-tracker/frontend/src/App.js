@@ -10,10 +10,16 @@ import Workouts from './components/Workouts';
 function App() {
   return (
     <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">OctoFit Tracker</Link>
-          <div className="collapse navbar-collapse">
+          <Link className="navbar-brand fw-bold d-flex align-items-center" to="/">
+            <img src={require('./logo.svg').default} alt="OctoFit Logo" className="App-logo" />
+            OctoFit Tracker
+          </Link>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item"><Link className="nav-link" to="/activities">Activities</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/leaderboard">Leaderboard</Link></li>
@@ -31,7 +37,15 @@ function App() {
           <Route path="/teams" element={<Teams />} />
           <Route path="/users" element={<Users />} />
           <Route path="/workouts" element={<Workouts />} />
-          <Route path="/" element={<h2>Welcome to OctoFit Tracker!</h2>} />
+          <Route path="/" element={
+            <div className="p-5 mb-4 bg-light rounded-3">
+              <div className="container-fluid py-5">
+                <h1 className="display-5 fw-bold">Welcome to OctoFit Tracker!</h1>
+                <p className="col-md-8 fs-4">Track your fitness activities, join teams, compete on the leaderboard, and get personalized workout suggestions.</p>
+                <Link className="btn btn-success btn-lg" to="/activities">Get Started</Link>
+              </div>
+            </div>
+          } />
         </Routes>
       </div>
     </div>

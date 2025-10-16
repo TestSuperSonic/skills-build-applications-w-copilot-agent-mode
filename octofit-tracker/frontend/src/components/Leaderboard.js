@@ -17,13 +17,60 @@ const Leaderboard = () => {
   }, [endpoint]);
 
   return (
-    <div>
-      <h2>Leaderboard</h2>
-      <ul>
-        {leaders.map((leader, idx) => (
-          <li key={leader.id || idx}>{JSON.stringify(leader)}</li>
-        ))}
-      </ul>
+    <div className="container">
+      <div className="card mb-4">
+        <div className="card-header bg-success text-white">
+          <h2 className="mb-0">Leaderboard</h2>
+        </div>
+        <div className="card-body">
+          <button className="btn btn-primary mb-3" type="button" data-bs-toggle="modal" data-bs-target="#leaderboardModal">
+            Add Leader
+          </button>
+          <div className="table-responsive">
+            <table className="table table-striped table-bordered">
+              <thead className="table-dark">
+                <tr>
+                  <th>#</th>
+                  {leaders[0] && Object.keys(leaders[0]).map((key) => (
+                    <th key={key}>{key}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {leaders.map((leader, idx) => (
+                  <tr key={leader.id || idx}>
+                    <td>{idx + 1}</td>
+                    {Object.keys(leader).map((key) => (
+                      <td key={key}>{String(leader[key])}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      {/* Modal placeholder */}
+      <div className="modal fade" id="leaderboardModal" tabIndex="-1" aria-labelledby="leaderboardModalLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="leaderboardModalLabel">Add Leader</h5>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              {/* Bootstrap form placeholder */}
+              <form>
+                <div className="mb-3">
+                  <label htmlFor="leaderName" className="form-label">Leader Name</label>
+                  <input type="text" className="form-control" id="leaderName" />
+                </div>
+                <button type="submit" className="btn btn-primary">Save</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
